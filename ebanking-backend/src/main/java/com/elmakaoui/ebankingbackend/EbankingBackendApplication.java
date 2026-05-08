@@ -1,14 +1,12 @@
 package com.elmakaoui.ebankingbackend;
 
-import com.elmakaoui.ebankingbackend.entities.AccountOperation;
-import com.elmakaoui.ebankingbackend.entities.CurrentAccount;
-import com.elmakaoui.ebankingbackend.entities.Customer;
-import com.elmakaoui.ebankingbackend.entities.SavingAccount;
+import com.elmakaoui.ebankingbackend.entities.*;
 import com.elmakaoui.ebankingbackend.enums.AccountStatus;
 import com.elmakaoui.ebankingbackend.enums.OperationType;
 import com.elmakaoui.ebankingbackend.repositories.AccountOperationRepository;
 import com.elmakaoui.ebankingbackend.repositories.BankAccountRepository;
 import com.elmakaoui.ebankingbackend.repositories.CustomerRepository;
+import com.elmakaoui.ebankingbackend.services.BankService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,6 +24,12 @@ public class EbankingBackendApplication {
     }
 
     @Bean
+    CommandLineRunner commandLineRunner(BankService bankService){
+        return args -> {
+            bankService.consulter();
+        };
+    }
+    //@Bean
     CommandLineRunner start(CustomerRepository customerRepository,
                             BankAccountRepository bankAccountRepository,
                             AccountOperationRepository accountOperationRepository){
